@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "crypto-js": "^4.2.0",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "node-fetch": "^2.7.0",
+    "path": "^0.12.7"
+  },
+  "name": "html_css_js",
+  "version": "1.0.0",
+  "description": "Podacst player to listen to podcast",
+  "main": "script.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maxcol01/podcast-app.git"
+  },
+  "author": "Max",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maxcol01/podcast-app/issues"
+  },
+  "homepage": "https://github.com/maxcol01/podcast-app#readme"
+}
