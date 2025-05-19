@@ -1,22 +1,29 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const path = require("path")
-const {join} = require("path");
+const path = require("path");
+const CryptoJS = require("crypto-js");
+const fetch = require("node-fetch");
+
+
+dotenv.config();
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000 ; // potential of having another port.
 
-const env = dotenv.config();
-AUTH_KEY = process.env.AUTH_KEY;
-SECRET_KEY= process.env.SECRET_KEY
-USER_AGENT= process.env.USER_AGENT
-API_ENDPOINT= process.env.API_ENDPOINT
+// using express to serve the static webpage by searching the directory name "public"
+app.use(express.static(path.join(__dirname,"public")));
 
 
-app.get("/", (req,res)=>{
-    res.sendFile(join(__dirname, "index.html"));
-})
+
+const authKEY = process.env.AUTH_KEY;
+const secretKey = process.env.SECRET_KEY
+const useragent = process.env.USER_AGENT
+const apiEndpoint = process.env.API_ENDPOINT
+
+
+
+
 
 app.listen(PORT, ()=>{
-    console.log(`Server is running at port:  localhost:${PORT}`)
+    console.log(`Server is running at port:  http://localhost:${PORT} pointing to ${apiEndpoint}`)
 })
