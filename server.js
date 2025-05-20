@@ -41,7 +41,7 @@ app.get("/api/search", async (req,res)=>{
     const headers = generateAuthHeader();
 
     try{
-        const response = await fetch(`${apiEndpoint}/api/search/?q=${encodeURI(query)}`, {
+        const response = await fetch(`${apiEndpoint}/search/byterm?q=${encodeURIComponent(query)}`, {
             method:"GET",
             headers: headers
         });

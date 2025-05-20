@@ -1,3 +1,8 @@
+/*Google font*/
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap');
+
+/*Hero patterns (for background for instance)*/
+
 html {
     box-sizing: border-box;
 }
@@ -5,17 +10,34 @@ html {
 body {
     margin:0;
     min-height: 100vh;
-    font-family: Roboto, sans-serif;
-    font-size: 100%;
+    background-color: #c9ced3;
+    font-family: League Spartan, sans-serif;
 }
 
-h1 {
-    padding: 10px;
-    margin: 10px auto;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-    border-radius: 20px;
-    color: lightgreen;
-    max-width: 80%;
-    text-align: center;
-    font-size: 200%;
+.nav-wrapper {
+    height: 50px;
+    width: 100%;
+    background-color: black;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    position:relative;
+    top:13px;
+}
+
+.nav-title {
+    font-size: 28px;
+    margin: 0;
+    margin-left: 25px;
+    color: white;
+}
+
+.nav-wrapper i {
+    color: #1db954;
+    font-size: 25px;
+    position: relative;
+    top:-5px;
+    left: 10px;
 }
