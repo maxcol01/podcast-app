@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="shortcut icon" href="microphone-lines-solid.svg" type="image/x-icon">
     <title>Podcast</title>
 </head>
 <body>
@@ -18,13 +19,26 @@
     <div class="page-wrapper">
         <!--        search container -->
         <div class="search-container">
+            <!--Search history-->
+            <div class="custom-select">
+                <select name="searchHistory" id="searchHistory" title="Search History">
+                    <option value="">Select a previous search</option>
+                </select>
+            </div>
+            <!--Search Input-->
             <label for="searchInput"></label>
             <input type="text"  id="searchInput" placeholder="Search by Podcast/Topic">
+            <div class="search-buttons">
+                <button type="button" id="searchButton">Search</button>
+                <button type="button" id="resetButton">Clear History</button>
+            </div>
         </div>
 
         <!--        Main container-->
         <div class="main-container">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At aut ipsum odio sed similique ut. Odio voluptate, voluptatibus! Amet aperiam assumenda cupiditate dolores iure sit! Aliquid ipsa iusto laudantium odit.</p>
+            <div class="loader-container">
+                <i class="fa-solid fa-microphone-lines"></i>
+            </div>
         </div>
 
         <!--        Player container-->
