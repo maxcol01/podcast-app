@@ -253,11 +253,11 @@ input {
 }
 
 .img-container {
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
   position: relative;
   top: -50px;
-  left: 50px;
+  margin: 0 auto;
 }
 
 .img-container img {
@@ -266,6 +266,13 @@ input {
   object-fit: cover;
   border-radius: 20px;
   box-shadow: 0 5px 30px 5px rgba(0, 0, 0, 0.5);
+}
+
+.title-container {
+    box-sizing: border-box;
+    padding: 10px;
+    position: relative;
+    top:-20px;
 }
 
 h2 {
@@ -279,6 +286,13 @@ h3 {
   text-align: center;
   font-weight: 400;
   margin: 5px 0 0;
+}
+
+/*Controls container*/
+.control-container {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
 }
 
 /* Progress */
@@ -310,11 +324,13 @@ h3 {
 .player-controls {
   position: relative;
   top: -15px;
-  left: 120px;
-  width: 200px;
+  left: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.fas {
+.player-controls .fas {
   font-size: 30px;
   color: rgb(129, 129, 129);
   margin-right: 30px;
@@ -322,14 +338,13 @@ h3 {
   user-select: none;
 }
 
-.fas:hover {
+.player-controls .fas:hover {
   filter: brightness(80%);
 }
 
 .main-button {
-  font-size: 40px;
   position: relative;
-  top: 3px;
+  left:3px
 }
 
 /* Media Query: iPhone (Vertical) */

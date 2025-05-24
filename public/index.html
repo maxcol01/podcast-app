@@ -102,27 +102,34 @@
         <!--        Player container-->
         <div class="player-container">
             <div class="player">
-                <!-- Song -->
+                <!-- Image -->
                 <div class="img-container">
-                    <img src="img/jacinto-1.jpg" alt="Album Art">
+                    <img id="image" src="./default-podcast.png" alt="Podcast image">
                 </div>
-                <h2 id="title">Electric Chill Machine</h2>
-                <h3 id="artist">Jacinto</h3>
-                <audio src="music/jacinto-1.mp3"></audio>
-                <!-- Progress -->
+                <div class="title-container">
+                    <h2 id="title">Podcast Title</h2>
+                    <h3 id="datePublished">Date Published</h3>
+                </div>
+
+                <!--Audio element-->
+                <audio id="player" src=""></audio>
+                <div class="control-container">
+                    <!-- Progress -->
                 <div class="progress-container" id="progress-container">
                     <div class="progress" id="progress"></div>
                     <div class="duration-wrapper">
                         <span id="current-time">0:00</span>
-                        <span id="duration">2:06</span>
+                        <span id="duration">0:00</span>
+                    </div>
+                    </div>
+                    <!-- Controls -->
+                    <div class="player-controls">
+                        <i class="fas fa-backward" id="prev" title="-15 Seconds"></i>
+                        <i class="fas fa-play main-button" id="play" title="Play"></i>
+                        <i class="fas fa-forward" id="next" title="+15 Seconds"></i>
                     </div>
                 </div>
-                <!-- Controls -->
-                <div class="player-controls">
-                    <i class="fas fa-backward" id="prev" title="Previous"></i>
-                    <i class="fas fa-play main-button" id="play" title="Play"></i>
-                    <i class="fas fa-forward" id="next" title="Next"></i>
-                </div>
+
             </div>
 
             <div class="queue">
