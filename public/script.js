@@ -1,3 +1,28 @@
+// Navigation ------
+const searchLink = document.getElementById("searchLink");
+const listenLink = document.getElementById("listenLink");
+const searchContainer = document.querySelector(".search-container");
+const mainContainer = document.querySelector(".main-container");
+const playerContainer = document.querySelector(".player-container");
+const queueContainer = document.querySelector(".queue");
+
+function navigateToSearch(){
+    searchContainer.style.display = "flex";
+    mainContainer.style.display = "flex";
+    playerContainer.style.display = "none";
+    queueContainer.style.display = "none";
+}
+
+function navigateToPlayer(){
+    searchContainer.style.display = "none";
+    mainContainer.style.display = "none";
+    playerContainer.style.display = "flex";
+    queueContainer.style.display = "flex";
+}
+
+searchLink.addEventListener("click", navigateToSearch);
+listenLink.addEventListener("click", navigateToPlayer);
+
 // const image = document.querySelector('img');
 // const title = document.getElementById('title');
 // const artist = document.getElementById('artist');

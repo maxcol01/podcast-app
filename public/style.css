@@ -347,28 +347,31 @@ h3 {
   left:3px
 }
 
-/* Media Query: iPhone (Vertical) */
-@media screen and (max-width: 376px) {
-  .player-container {
-    width: 95vw;
-  }
+/* Smart phone/tablet */
+@media screen and (max-width: 1025px) {
+    /*navigation */
+    .nav-wrapper {
+        position: fixed;
+        z-index: 10;
+    }
 
-  .img-container {
-    left: 29px;
-  }
+    .nav-title {
+        font-size: 20px;
+    }
+    .nav-list span {
+        font-size: 18px;
+        color: white;
+        position: relative;
+        left: 25px;
+    }
+}
 
-  h2 {
-    font-size: 20px;
-  }
+.nav-list span:first-child {
+    margin-right: 10px;
+}
 
-  h3 {
-    font-size: 15px;
-  }
-
-  .player-controls {
-    top: -10px;
-    left: 100px;
-  }
+.nav-list .selected {
+    border-bottom: 2px solid #1db954;
 }
 
 /*Queue*/
