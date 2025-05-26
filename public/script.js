@@ -11,6 +11,8 @@ function navigateToSearch(){
     mainContainer.style.display = "flex";
     playerContainer.style.display = "none";
     queueContainer.style.display = "none";
+    searchLink.classList.add("selected");
+    listenLink.classList.remove("selected");
 }
 
 function navigateToPlayer(){
@@ -18,6 +20,8 @@ function navigateToPlayer(){
     mainContainer.style.display = "none";
     playerContainer.style.display = "flex";
     queueContainer.style.display = "flex";
+    listenLink.classList.add("selected");
+    searchLink.classList.remove("selected");
 }
 
 searchLink.addEventListener("click", navigateToSearch);

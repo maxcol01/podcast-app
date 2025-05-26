@@ -35,7 +35,6 @@ body {
 
 .nav-title {
     font-size: 28px;
-    margin: 0;
     margin-left: 25px;
     color: white;
 }
@@ -46,6 +45,10 @@ body {
     position: relative;
     top:-5px;
     left: 10px;
+}
+
+.nav-list {
+    display: none;
 }
 
 /*Search container ----------------------------------*/
@@ -355,14 +358,26 @@ h3 {
         z-index: 10;
     }
 
+    nav {
+        top: 14px;
+    }
+
     .nav-title {
         font-size: 20px;
+    }
+
+    .nav-list {
+        position: relative;
+        display: flex;
+        top:3px;
+        left: -4px;
     }
     .nav-list span {
         font-size: 18px;
         color: white;
         position: relative;
         left: 25px;
+        padding-bottom: 3px;
     }
 }
 
