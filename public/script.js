@@ -1,31 +1,63 @@
-// Navigation ------
-const searchLink = document.getElementById("searchLink");
-const listenLink = document.getElementById("listenLink");
-const searchContainer = document.querySelector(".search-container");
-const mainContainer = document.querySelector(".main-container");
-const playerContainer = document.querySelector(".player-container");
-const queueContainer = document.querySelector(".queue");
+document.addEventListener("DOMContentLoaded", ()=>{
+    //
+    const searchHistory = document.getElementById("searchHistory");
+    const searchInput = document.getElementById("searchInput");
+    const searchButton = document.getElementById("resetButton");
+    const resetButton = document.getElementById("resetButton");
 
-function navigateToSearch(){
-    searchContainer.style.display = "flex";
-    mainContainer.style.display = "flex";
-    playerContainer.style.display = "none";
-    queueContainer.style.display = "none";
-    searchLink.classList.add("selected");
-    listenLink.classList.remove("selected");
-}
+    // Event listener for search button, input
+    searchButton.addEventListener("click", searchPodcast);
+    searchInput.addEventListener("keypress", (event) =>{
+        if (event.key === "Enter"){
+            searchPodcast();
+        }
+    });
+    // event listener to reset our input
+    searchInput.addEventListener("focus", ()=>{
+        searchInput.value = "";
+    });
+    // Search Podcasts
+    function searchPodcast(){
+        const searchTerm = searchInput.value.trim();
+        if (searchTerm){
+            console.log("Searched", searchTerm);
+        }
+    }
 
-function navigateToPlayer(){
-    searchContainer.style.display = "none";
-    mainContainer.style.display = "none";
-    playerContainer.style.display = "flex";
-    queueContainer.style.display = "flex";
-    listenLink.classList.add("selected");
-    searchLink.classList.remove("selected");
-}
 
-searchLink.addEventListener("click", navigateToSearch);
-listenLink.addEventListener("click", navigateToPlayer);
+
+
+
+
+    // Navigation ------
+    const searchLink = document.getElementById("searchLink");
+    const listenLink = document.getElementById("listenLink");
+    const searchContainer = document.querySelector(".search-container");
+    const mainContainer = document.querySelector(".main-container");
+    const playerContainer = document.querySelector(".player-container");
+    const queueContainer = document.querySelector(".queue");
+
+    function navigateToSearch(){
+        searchContainer.style.display = "flex";
+        mainContainer.style.display = "flex";
+        playerContainer.style.display = "none";
+        queueContainer.style.display = "none";
+        searchLink.classList.add("selected");
+        listenLink.classList.remove("selected");
+    }
+
+    function navigateToPlayer(){
+        searchContainer.style.display = "none";
+        mainContainer.style.display = "none";
+        playerContainer.style.display = "flex";
+        queueContainer.style.display = "flex";
+        listenLink.classList.add("selected");
+        searchLink.classList.remove("selected");
+    }
+
+    searchLink.addEventListener("click", navigateToSearch);
+    listenLink.addEventListener("click", navigateToPlayer);
+});
 
 // const image = document.querySelector('img');
 // const title = document.getElementById('title');
