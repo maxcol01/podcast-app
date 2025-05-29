@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     const searchInput = document.getElementById("searchInput");
     const searchButton = document.getElementById("resetButton");
     const resetButton = document.getElementById("resetButton");
+    const responseContainer = document.getElementById("response");
 
     // Load search history from local storage
     function loadSearchHistory (){
@@ -66,13 +67,30 @@ document.addEventListener("DOMContentLoaded", ()=>{
     loadSearchHistory();
 
     // Search Podcasts
-    function searchPodcast(){
+    async  function searchPodcast(){
         const searchTerm = searchInput.value.trim();
         if (searchTerm){
             console.log("Searched", searchTerm);
             saveSearchHistory(searchTerm);
             loadSearchHistory();
+        } else {
+            responseContainer.innerText = "Please enter a podcast title !";
         }
+
+        try {
+            const response = await fetch(`/api/search?q=${encodeURIComponent(searchTerm)}`);
+            const data = await response.json();
+            responseContainer.textContent = "";
+            if (data.feeds && data.feeds.length > 0){
+                console.log("Results:", data)
+            }else {
+                responseContainer.innerText = "No results found";
+            }
+
+        }catch (error){
+            responseContainer.innerText = `Error: ${error.message}`;
+        }
+
     }
 
 
