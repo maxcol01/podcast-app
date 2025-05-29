@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     const searchButton = document.getElementById("resetButton");
     const resetButton = document.getElementById("resetButton");
     const responseContainer = document.getElementById("response");
-
+    const loader = document.getElementById("loader");
     // Load search history from local storage
     function loadSearchHistory (){
         const saveSearches = JSON.parse(localStorage.getItem("searchHistory")) || [];
@@ -66,6 +66,23 @@ document.addEventListener("DOMContentLoaded", ()=>{
     // LOad search history when the page loads
     loadSearchHistory();
 
+    // formatDate function
+    function formatDate(timestamp){
+        const date = new Date(timestamp * 1000);
+        return date.toLocaleDateString();
+    }
+
+    // Show loading animation
+    function showLoader(){
+        loader.style.display = "flex";
+        responseContainer.style.display = "none";
+    }
+
+    function hideLoader() {
+        loader.style.display = "none";
+        responseContainer.style.display = "flex";
+    }
+
     // Search Podcasts
     async  function searchPodcast(){
         const searchTerm = searchInput.value.trim();
@@ -75,14 +92,20 @@ document.addEventListener("DOMContentLoaded", ()=>{
             loadSearchHistory();
         } else {
             responseContainer.innerText = "Please enter a podcast title !";
+            return
         }
+
+        showLoader();
 
         try {
             const response = await fetch(`/api/search?q=${encodeURIComponent(searchTerm)}`);
             const data = await response.json();
             responseContainer.textContent = "";
             if (data.feeds && data.feeds.length > 0){
-                console.log("Results:", data)
+                data.feeds.forEach(podcast => {
+                    const card = createCard(podcast);
+                    responseContainer.appendChild(card);
+                })
             }else {
                 responseContainer.innerText = "No results found";
             }
@@ -91,9 +114,47 @@ document.addEventListener("DOMContentLoaded", ()=>{
             responseContainer.innerText = `Error: ${error.message}`;
         }
 
+        hideLoader();
+
     }
 
+    // Creating our podcast card
+    // the idea is to build the element we want to be displayed in the HTML (right now as placeholders).
+    // So once it is build as we want it (see HTML for reference), we simply remove the hard coded HTML as we have now a dynamic way to create our cards !
+    function createCard(podcast){
+        const card = document.createElement("div");
+        card.className = "card";
 
+        const img = document.createElement("img");
+        img.src = podcast.image || "./default-podcast.png";
+        img.alt = podcast.title;
+
+        const content = document.createElement("div");
+        content.className = "card-content";
+
+        const title = document.createElement("h3");
+        title.innerText = podcast.title;
+
+        const description = document.createElement("p");
+        description.innerText = podcast.description;
+
+        const episodeCount = document.createElement("p");
+        episodeCount.className = "episode-count";
+        episodeCount.innerText = `Episode: ${podcast.episodeCount}`
+
+        const pubDate = document.createElement("p");
+        pubDate.className = "pub-date";
+        pubDate.innerText = `Newest episode: ${podcast.newestItemPubdate ? formatDate(podcast.newestItemPubdate) : "Not available"}`;
+
+        content.appendChild(title);
+        content.appendChild(description);
+        content.appendChild(episodeCount);
+        content.appendChild(pubDate);
+
+        card.appendChild(img);
+        card.appendChild(content);
+        return card
+    }
 
 
 
