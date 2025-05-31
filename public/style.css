@@ -208,6 +208,10 @@ input {
     display: flex;
 }
 
+.pointer {
+    cursor: pointer;
+}
+
 .car img {
     width: 250px;
     height: auto;
