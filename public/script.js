@@ -83,6 +83,29 @@ document.addEventListener("DOMContentLoaded", ()=>{
         responseContainer.style.display = "flex";
     }
 
+    // setup to load podcast episode images
+    function handleImageLoad(limit){
+        const images = responseContainer.getElementsByTagName("img");
+        let imagesToLoad = Math.min(images.length, limit); // if less than limit.
+        const fallbackImage = "./default-podcast.png";
+        if (imagesToLoad === 0){
+            hideLoader();
+            return;
+        }
+
+        Array.from(images).slice(0,limit).forEach(img =>{
+            img.onload = img.onerror = () => {
+                imagesToLoad--;
+                if (img.complete && !img.naturalWidth){
+                    img.src = fallbackImage;
+                }
+
+                if (imagesToLoad === 0){
+                    hideLoader();
+                }
+            };
+        });
+    }
     // Search Podcasts
     async  function searchPodcast(){
         const searchTerm = searchInput.value.trim();
@@ -101,10 +124,22 @@ document.addEventListener("DOMContentLoaded", ()=>{
             const response = await fetch(`/api/search?q=${encodeURIComponent(searchTerm)}`);
             const data = await response.json();
             responseContainer.textContent = "";
+
+            const titles = new Set(); // collection of unique data.
+
             if (data.feeds && data.feeds.length > 0){
-                data.feeds.forEach(podcast => {
-                    const card = createCard(podcast);
-                    responseContainer.appendChild(card);
+                data.feeds.forEach((podcast, index) => {
+                    if (podcast.episodeCount > 0 && !titles.has(podcast.title)){
+                        titles.add(podcast.title);
+                        const card = createCard(podcast);
+                        responseContainer.appendChild(card);
+
+                        if (index >= 25){
+                            card.querySelector("img").dataset.src = card.querySelector("img").src;
+                            card.querySelector('img').src = "";
+                        }
+                    }
+                    handleImageLoad(25);
                 })
             }else {
                 responseContainer.innerText = "No results found";
@@ -114,7 +149,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
             responseContainer.innerText = `Error: ${error.message}`;
         }
 
-        hideLoader();
+        //hideLoader();
 
     }
 
@@ -171,19 +206,24 @@ document.addEventListener("DOMContentLoaded", ()=>{
             responseContainer.textContent = "";
             if (data.items && data.items.length > 0){
                 console.log("Episodes:", data.items);
-                data.items.forEach(episode => {
+                data.items.forEach(((episode, index) => {
                     const card = createEpisodeCard(episode);
                     responseContainer.appendChild(card);
-                })
+                    if (index >=25){
+                      card.querySelector("img").dataset.src = card.querySelector("img").src;
+                      card.querySelector("img").src = "";
+                    }
+
+                }));
             }else {
                 responseContainer.innerText = "No results found";
             }
-
+            handleImageLoad(25);
         }catch (error){
             responseContainer.innerText = `Error: ${error.message}`;
         }
 
-        hideLoader();
+        // hideLoader();
 
     }
 
